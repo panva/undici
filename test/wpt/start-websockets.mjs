@@ -3,6 +3,7 @@ import { join } from 'path'
 import { fileURLToPath } from 'url'
 import { fork } from 'child_process'
 import { on } from 'events'
+import options from 'internal/options'
 
 const { WPT_REPORT } = process.env
 
@@ -11,7 +12,7 @@ function isGlobalAvailable () {
     return true
   }
 
-  return process.execArgv.includes('--experimental-websocket')
+  return typeof options.getOptionValue('--experimental-websocket') === 'boolean'
 }
 
 if (process.env.CI) {
